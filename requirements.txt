@@ -1,0 +1,32 @@
+# ── Core RAG dependencies ──────────────────────────────────────────────────────
+sentence-transformers>=2.7.0
+faiss-cpu>=1.7.4
+
+# ── LLM backend: Ollama (recommended) ─────────────────────────────────────────
+# Python client for Ollama. The Ollama app must also be installed separately:
+#   https://ollama.com/download
+ollama>=0.1.9
+
+# ── LLM backend: transformers (fallback) ──────────────────────────────────────
+transformers>=4.41.2
+torch>=2.6.0
+sentencepiece>=0.1.99
+accelerate>=0.30.0
+
+# ── LLM backend: llama-cpp (optional) ─────────────────────────────────────────
+# Only needed if LLM_BACKEND = "llama_cpp" in config.py
+# Uncomment + download a GGUF model (see README):
+# llama-cpp-python
+
+# ── Document loaders ───────────────────────────────────────────────────────────
+python-docx>=1.1.2
+pdfplumber>=0.10.0
+PyPDF2>=3.0.1
+
+# ── Utilities ──────────────────────────────────────────────────────────────────
+numpy>=1.24
+psutil>=5.9.0
+tqdm>=4.66.0
+
+# ── UI (optional Gradio chat interface) ───────────────────────────────────────
+gradio>=4.44.0
