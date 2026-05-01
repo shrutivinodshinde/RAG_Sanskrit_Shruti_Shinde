@@ -1,6 +1,6 @@
 # 🕉️ Sanskrit RAG System
 
-> A **CPU-only Retrieval-Augmented Generation (RAG)** pipeline for querying Sanskrit documents written in Devanagari script — supporting Sanskrit, English, and IAST transliteration.
+> A **Retrieval-Augmented Generation (RAG)** pipeline for querying Sanskrit documents written in Devanagari script — supporting Sanskrit, English, and IAST transliteration.
 
 ---
 
@@ -13,7 +13,8 @@
 - [Setup & Installation](#setup--installation)
 - [Configuration](#configuration)
 - [Running the System](#running-the-system)
-- [Example Queries & Expected Outputs](#example-queries--expected-outputs)
+- [Example Queries](#example-queries)
+- [Screenshots](#screenshots)
 - [Evaluation](#evaluation)
 - [Performance Benchmarks](#performance-benchmarks)
 - [Corpus](#corpus)
@@ -340,7 +341,7 @@ Query › श्वानशावकस्य मृत्यु: कथम् 
 
 The system provides a CPU-based interactive Gradio chatbot interface for querying Sanskrit documents in Devanagari, English, or transliteration.
 
-![Gradio Chat UI](report/pic1.png)
+![Gradio Chat UI](report/pic2.png)
 
 ---
 
@@ -348,7 +349,7 @@ The system provides a CPU-based interactive Gradio chatbot interface for queryin
 
 Example showing a Sanskrit query and the grounded answer generated from retrieved document chunks.
 
-![Sanskrit Query Example](report/pic2.png)
+![Sanskrit Query Example](report/pic1.png)
 
 ---
 
@@ -366,27 +367,6 @@ The evaluation suite (`evaluate.py`) tests the pipeline against a built-in groun
 | **Generation Latency** | Time in seconds for LLM text generation |
 | **RAM Delta** | Memory change per query (via `psutil`) |
 
-### Running
-
-```bash
-cd code
-python evaluate.py --output ../report/eval_results.json
-```
-
-## Performance Benchmarks
-
-Measured on a typical laptop (Intel Core i5/i7, 16 GB RAM, no GPU).
-
-| Metric | Ollama llama3 | Transformers flan-t5-large | llama-cpp TinyLlama Q4 | Simple (no LLM) |
-|---|---|---|---|---|
-| Index build time | ~5–10s | ~5–10s | ~5–10s | ~5–10s |
-| Retrieval latency | ~0.03–0.05s | ~0.03–0.05s | ~0.03–0.05s | ~0.03–0.05s |
-| Generation latency | ~8–30s | ~2–8s | ~5–20s | 0s |
-| RAM usage | ~4–8 GB | ~1.5 GB | ~700 MB | ~400 MB |
-| Answer quality | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐ | Raw context |
-
----
-
 ## Corpus
 
 The default corpus (`data/sanskrit_corpus.txt`) contains five bilingual Sanskrit prose stories — each with the original Devanagari text and an interleaved English translation.
@@ -399,36 +379,6 @@ The default corpus (`data/sanskrit_corpus.txt`) contains five bilingual Sanskrit
 | 4 | भक्तः देवश्च | The devoted person who refused human help and drowned waiting for God |
 | 5 | शीतं बहु बाधते | Kalidasa corrects a foreign scholar's Sanskrit grammar mistake in disguise |
 
-### Adding New Documents
-
-Place any `.txt`, `.docx`, or `.pdf` file into `data/` and run:
-
-```bash
-cd code
-python main.py --rebuild
-```
-
-Or add a single document programmatically:
-
-```python
-from rag_pipeline import SanskritRAGPipeline
-
-pipeline = SanskritRAGPipeline()
-pipeline.ingest()
-pipeline.add_document("path/to/new_document.txt")
-```
-
-For best chunking results, format story separators in your `.txt` files as:
-
-```
-==========================================================================
-STORY 1: मूर्खभृत्यस्य कथा — Story of the Foolish Servant
-==========================================================================
-
-Sanskrit text and English translation here...
-```
-
----
 
 ## Troubleshooting
 
