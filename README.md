@@ -147,7 +147,7 @@ RAG_Sanskrit/
 
 ```bash
 git clone <your-repo-url>
-cd RAG_Sanskrit
+cd RAG_Sanskrit_Shruti_Shinde
 ```
 
 ### 2. Create a Virtual Environment
@@ -245,20 +245,6 @@ cd code
 python query_interface.py
 ```
 
-Available commands inside the REPL:
-
-```
-Query › Who is Kalidasa?
-Query › शंखनादः कः आसीत्?
-Query › context on       # show retrieved chunks with each answer
-Query › context off      # hide retrieved chunks
-Query › top 3            # retrieve 3 chunks instead of default 5
-Query › status           # show index statistics
-Query › rebuild          # force-rebuild index from data/
-Query › help             # show all commands
-Query › quit
-```
-
 ### Single-Shot Query (Non-interactive)
 
 ```bash
@@ -315,46 +301,24 @@ python evaluate.py --output ../report/eval_results.json
 
 ---
 
-## Example Queries & Expected Outputs
-
-### In-Corpus Queries (Answered from documents)
+## Example Queries
 
 **English query:**
 ```
 Query › Who was Shankhanaad and what mistakes did he make?
 
-Answer:
-  Shankhanaad was the foolish servant of Govardhandas. When asked
-  to bring sugar, he wrapped it in his old torn cloth, causing all
-  of it to spill on the road before he arrived home.
-
-⏱  retrieval: 0.04s  |  generation: 10–20s
 ```
 
 **Sanskrit query:**
 ```
 Query › शंखनादः शर्कराम् कथम् आनीतवान्?
 
-Answer:
-  शंखनादः स्वस्य जीर्णवस्त्रे शर्करां बद्ध्वा आनीतवान्।
-  सर्वापि शर्करा मार्गे एव स्रवति स्म।
-  (Shankhanaad brought the sugar wrapped in his old torn cloth,
-  and all of it spilled on the road.)
-
-⏱  retrieval: 0.04s  |  generation: 15–30s
 ```
 
 **English query:**
 ```
 Query › How did Kalidasa help the new poet get one lakh rupees?
 
-Answer:
-  Kalidasa sat in the new poet's palanquin disguised as him. When
-  King Bhoj's scholars came to test the poet, Kalidasa answered
-  brilliantly. Impressed, King Bhoj awarded one lakh rupees, which
-  Kalidasa then passed on to the new poet.
-
-⏱  retrieval: 0.05s  |  generation: 10–20s
 ```
 
 ### Out-of-Corpus Queries (Graceful refusal)
@@ -362,20 +326,29 @@ Answer:
 ```
 Query › Who wrote the Mahabharata?
 
-Answer:
-  I could not find the answer in the provided documents.
-
-⏱  retrieval: 0.04s  |  generation: 5–15s
 ```
 
 ```
 Query › श्वानशावकस्य मृत्यु: कथम् अभवत्?
-
-Answer:
-  I could not find the answer in the provided documents.
-
-⏱  retrieval: 0.04s  |  generation: 5–15s
 ```
+
+---
+
+## Screenshots
+
+### Gradio Chat Interface
+
+The system provides a CPU-based interactive Gradio chatbot interface for querying Sanskrit documents in Devanagari, English, or transliteration.
+
+![Gradio Chat UI](report/pic1.png)
+
+---
+
+### Sanskrit Query Example
+
+Example showing a Sanskrit query and the grounded answer generated from retrieved document chunks.
+
+![Sanskrit Query Example](report/pic2.png)
 
 ---
 
@@ -399,29 +372,6 @@ The evaluation suite (`evaluate.py`) tests the pipeline against a built-in groun
 cd code
 python evaluate.py --output ../report/eval_results.json
 ```
-
-### Sample Output
-
-```
-════════════════════════════════════════════════════════════════════════
-  Sanskrit RAG System — Evaluation
-════════════════════════════════════════════════════════════════════════
-
-  [1/8] Who was Shankhanaad and what was his problem?
-       Keyword score : 0.75  |  MRR : 1.00
-       Latency       : ret=0.04s  gen=18.2s
-
-  Metric                           Value
-  ────────────────────────────────────────
-  Avg Keyword Hit Rate              0.720
-  Avg MRR@4                         0.850
-  Avg Retrieval Time (s)            0.042
-  Avg Generation Time (s)          22.400
-  Total Queries                         8
-════════════════════════════════════════════════════════════════════════
-```
-
----
 
 ## Performance Benchmarks
 
