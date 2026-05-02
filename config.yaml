@@ -1,0 +1,15 @@
+# LLM Backend: "ollama" | "transformers" | "llama_cpp" | "simple"
+llm_backend: "ollama"
+ollama_model: "llama3:latest"
+transformers_model: "google/flan-t5-large"
+llama_model_path: "../models/tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf"
+
+# Retrieval Settings
+top_k: 5
+similarity_threshold: 0.35
+chunk_size: 800
+chunk_overlap: 150
+
+# Paths
+data_dir: "../data"
+vector_store_dir: "../vector_store"
