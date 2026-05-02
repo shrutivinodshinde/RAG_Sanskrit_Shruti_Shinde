@@ -16,7 +16,6 @@
 - [Example Queries](#example-queries)
 - [Screenshots](#screenshots)
 - [Evaluation](#evaluation)
-- [Performance Benchmarks](#performance-benchmarks)
 - [Corpus](#corpus)
 - [Troubleshooting](#troubleshooting)
 - [License](#license)
@@ -132,6 +131,10 @@ RAG_Sanskrit/
 │
 ├── requirements.txt
 └── README.md
+
+> **Note:** The `vector_store/` directory is **not included in the repo**.
+> It is created automatically the first time you run `main.py` or `query_interface.py`.
+> Do not create it manually.
 ```
 
 ---
@@ -140,14 +143,14 @@ RAG_Sanskrit/
 
 ### Prerequisites
 
-- Python 3.9 or higher
-- pip
+* Python 3.9 or higher — verify with `python --version` or `python3 --version`
+* pip — verify with `pip --version`
 - (Optional) [Ollama](https://ollama.com/download) for the recommended LLM backend
 
 ### 1. Clone the Repository
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/shrutivinodshinde/RAG_Sanskrit_Shruti_Shinde.git
 cd RAG_Sanskrit_Shruti_Shinde
 ```
 
@@ -170,6 +173,8 @@ pip install -r requirements.txt
 ```
 
 > **Note:** PyTorch CPU build is approximately 700 MB. First install may take a few minutes depending on your internet speed.
+> **No API keys required.** All LLM backends (Ollama, Transformers, llama-cpp, Simple) run
+> fully locally. No OpenAI, Anthropic, or cloud credentials are needed.
 
 ### 4. Add Sanskrit Documents
 
@@ -283,12 +288,21 @@ cd code
 python main.py
 ```
 
-### Force Rebuild Index
+### Adding New Documents & Rebuilding the Index
+
+To add your own Sanskrit (or bilingual) documents:
+
+1. Place your `.txt`, `.docx`, or `.pdf` files in the `data/` directory.
+2. Ensure files use **UTF-8 encoding** with Devanagari text.
+3. Optionally separate story sections using `==========` (10+ `=` signs) with a title line between them.
+4. Rebuild the FAISS index to include the new documents:
 
 ```bash
 cd code
 python main.py --rebuild
 ```
+
+> The old `vector_store/` index is overwritten. Queries after this will reflect the updated corpus.
 
 ### Run Evaluation Suite
 
